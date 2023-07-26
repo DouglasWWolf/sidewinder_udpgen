@@ -1,6 +1,5 @@
-# Sidewinder 100G Ethernet Packet Generator
+# Sidewinder 100G UDP Packet Generator
 
 
 ![Design Schematic](/image/design.png)
 
-# sidewinder_udpgen
