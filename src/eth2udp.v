@@ -14,17 +14,16 @@
 */
 module eth2udp # 
 (
-    parameter[7:0] SRC_MAC = 1,    
-    parameter[7:0] SRC_IP0 = 10,
-    parameter[7:0] SRC_IP1 = 11,
-    parameter[7:0] SRC_IP2 = 12,
-    parameter[7:0] SRC_IP3 = 11,
+    parameter[ 7:0] SRC_MAC = 1,    
+    parameter[ 7:0] SRC_IP0 = 10,
+    parameter[ 7:0] SRC_IP1 = 1,
+    parameter[ 7:0] SRC_IP2 = 1,
+    parameter[ 7:0] SRC_IP3 = 2,
 
-    parameter[7:0] DST_IP0 = 10,
-    parameter[7:0] DST_IP1 = 11,
-    parameter[7:0] DST_IP2 = 12,
-    parameter[7:0] DST_IP3 = 255,
-
+    parameter[ 7:0] DST_IP0 = 10,
+    parameter[ 7:0] DST_IP1 = 1,
+    parameter[ 7:0] DST_IP2 = 1,
+    parameter[ 7:0] DST_IP3 = 255,
     parameter[15:0] SRC_PORT = 1000,
     parameter[15:0] DST_PORT = 32000
 ) 
@@ -100,7 +99,7 @@ wire[31:0] ip4_32_cs = ip4_partial_cs + ip4_length;
 // Compute the 16-bit IPv4 checksum
 wire[15:0] ip4_checksum = ~(ip4_32_cs[15:0] + ip4_32_cs[31:16]);
 
-// This is the 42-byte packet header packet header for a UDP packet
+// This is the 42-byte packet header for a UDP packet
 wire[511:0] pkt_header =
 {
     // Ethernet header fields
@@ -127,17 +126,28 @@ wire[511:0] pkt_header =
     udp_checksum
 };
 
-// This 42 1-bits for writing to the TX_TKEEP line
+
+// The Ethernet IP sends the bytes from least-sigificant-byte to most-significant-byte.  
+// This means we need to create a little-endian (i.e., reversed) version of our packet 
+// header.
+wire[511:0] pkt_header_le;
+genvar i;
+for (i=0; i<42; i=i+1) begin
+    assign pkt_header_le[i*8 +:8] = pkt_header[(41-i)*8 +:8];
+end 
+
+
+// This is 42 1-bits for writing to the TX_TKEEP line
 localparam[41:0] pkt_tkeep = -1;
 
 //=====================================================================================================================
 // The output stream is either our pkt_header, or is driven directly by the input stream
 //=====================================================================================================================
 assign AXIS_TX_TVALID = (fsm_state == 0) ? (AXIS_LEN_TREADY & AXIS_LEN_TVALID) : AXIS_RX_TVALID;
-assign AXIS_TX_TDATA  = (fsm_state == 0) ? pkt_header : AXIS_RX_TDATA;
-assign AXIS_TX_TKEEP  = (fsm_state == 0) ? pkt_tkeep : AXIS_RX_TKEEP;
-assign AXIS_TX_TLAST  = (fsm_state == 0) ? 0 : AXIS_RX_TLAST;
-assign AXIS_RX_TREADY = (fsm_state == 0) ? 0 : AXIS_TX_TREADY;
+assign AXIS_TX_TDATA  = (fsm_state == 0) ? pkt_header_le : AXIS_RX_TDATA;
+assign AXIS_TX_TKEEP  = (fsm_state == 0) ? pkt_tkeep     : AXIS_RX_TKEEP;
+assign AXIS_TX_TLAST  = (fsm_state == 0) ? 0             : AXIS_RX_TLAST;
+assign AXIS_RX_TREADY = (fsm_state == 0) ? 0             : AXIS_TX_TREADY;
 //=====================================================================================================================
 
 

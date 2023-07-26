@@ -7,52 +7,52 @@
    "No Loops_ExpandedHierarchyInLayout":"",
    "No Loops_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
-preplace port qsfp0_clk -pg 1 -lvl 4 -x 1090 -y 690 -defaultsOSRD -right
-preplace port qsfp1_clk -pg 1 -lvl 4 -x 1090 -y 710 -defaultsOSRD -right
-preplace port QSFP_TX0_STREAM -pg 1 -lvl 0 -x 0 -y 280 -defaultsOSRD
-preplace port AXI_QSFP_STATUS -pg 1 -lvl 0 -x 0 -y 800 -defaultsOSRD
-preplace port qsfp0_gt -pg 1 -lvl 4 -x 1090 -y 460 -defaultsOSRD
-preplace port qsfp1_gt -pg 1 -lvl 4 -x 1090 -y 490 -defaultsOSRD
-preplace port QSPF_TX1_STREAM -pg 1 -lvl 0 -x 0 -y 300 -defaultsOSRD
-preplace port port-id_init_clk -pg 1 -lvl 0 -x 0 -y 480 -defaultsOSRD
-preplace port port-id_reset_in -pg 1 -lvl 0 -x 0 -y 500 -defaultsOSRD
-preplace port port-id_qsfp0_channel_up -pg 1 -lvl 4 -x 1090 -y 730 -defaultsOSRD
-preplace port port-id_qsfp1_channel_up -pg 1 -lvl 4 -x 1090 -y 750 -defaultsOSRD
-preplace port port-id_data_clock -pg 1 -lvl 0 -x 0 -y 520 -defaultsOSRD
-preplace port port-id_data_aresetn -pg 1 -lvl 0 -x 0 -y 780 -defaultsOSRD
-preplace inst ch0_ethernet -pg 1 -lvl 2 -x 320 -y 440 -swap {5 1 2 3 4 8 6 7 0 9 10 11 12 13 14 15 16 17 18 19 21 20 23 26 25 24 22} -defaultsOSRD -pinDir qsfp_gt right -pinY qsfp_gt 20R -pinDir qsfp_clk right -pinY qsfp_clk 40R -pinDir axis_rx right -pinY axis_rx 0R -pinDir TX_DATA_STREAM left -pinY TX_DATA_STREAM 0L -pinDir reset_in left -pinY reset_in 60L -pinDir init_clk left -pinY init_clk 40L -pinDir rx_clk_out right -pinY rx_clk_out 80R -pinDir channel_up right -pinY channel_up 100R -pinDir data_aresetn left -pinY data_aresetn 100L -pinDir data_clock left -pinY data_clock 80L -pinBusDir rx_resetn right -pinBusY rx_resetn 60R
-preplace inst ch1_ethernet -pg 1 -lvl 2 -x 320 -y 650 -swap {5 1 2 3 4 8 6 7 0 9 10 11 12 13 14 15 16 17 18 19 21 20 25 24 23 22} -defaultsOSRD -pinDir qsfp_gt right -pinY qsfp_gt 20R -pinDir qsfp_clk right -pinY qsfp_clk 60R -pinDir axis_rx right -pinY axis_rx 0R -pinDir TX_DATA_STREAM left -pinY TX_DATA_STREAM 0L -pinDir reset_in left -pinY reset_in 40L -pinDir init_clk left -pinY init_clk 20L -pinDir channel_up right -pinY channel_up 100R -pinDir data_aresetn left -pinY data_aresetn 80L -pinDir data_clock left -pinY data_clock 60L -pinDir rx_clk_in right -pinY rx_clk_in 80R
-preplace inst qsfp_status -pg 1 -lvl 3 -x 850 -y 550 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 21 23 20 22} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 0L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 80L -pinDir ss0_channel_up left -pinY ss0_channel_up 20L -pinDir ss1_channel_up left -pinY ss1_channel_up 60L
-preplace inst tx_data_ila -pg 1 -lvl 2 -x 320 -y 280 -defaultsOSRD -pinDir SLOT_0_AXIS left -pinY SLOT_0_AXIS 0L -pinDir SLOT_1_AXIS left -pinY SLOT_1_AXIS 20L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L
-preplace inst data_consumer_0 -pg 1 -lvl 3 -x 850 -y 220 -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L -pinBusDir packet_id right -pinBusY packet_id 0R -pinBusDir cycle_id right -pinBusY cycle_id 20R
-preplace inst data_consumer_1 -pg 1 -lvl 3 -x 850 -y 360 -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L -pinBusDir packet_id right -pinBusY packet_id 0R -pinBusDir cycle_id right -pinBusY cycle_id 20R
-preplace inst rx_data_ila -pg 1 -lvl 3 -x 850 -y 60 -swap {0 1 2 3 4 5 6 7 8 9 10 11 17 15 16 13 14 12} -defaultsOSRD -pinDir SLOT_0_AXIS left -pinY SLOT_0_AXIS 0L -pinDir SLOT_1_AXIS left -pinY SLOT_1_AXIS 20L -pinDir clk left -pinY clk 60L -pinBusDir probe0 right -pinBusY probe0 40R -pinBusDir probe1 right -pinBusY probe1 60R -pinBusDir probe2 right -pinBusY probe2 0R -pinBusDir probe3 right -pinBusY probe3 20R -pinDir resetn left -pinY resetn 40L
-preplace netloc aclk_1 1 0 3 N 520 100 590 NJ
-preplace netloc aresetn_1 1 0 3 20 820 120 820 680J
-preplace netloc aurora_64b66b_0_channel_up 1 2 2 580 730 NJ
-preplace netloc aurora_core_1_channel_up 1 2 2 660 750 NJ
-preplace netloc clock_1 1 0 2 N 480 80
-preplace netloc cycle_id_1 1 3 1 1030 100n
-preplace netloc cycle_id_2 1 3 1 1070 60n
-preplace netloc packet_id_1 1 3 1 1010 120n
-preplace netloc packet_id_2 1 3 1 1050 80n
+preplace port qsfp0_clk -pg 1 -lvl 4 -x 1070 -y 690 -defaultsOSRD -right
+preplace port qsfp1_clk -pg 1 -lvl 4 -x 1070 -y 710 -defaultsOSRD -right
+preplace port QSFP_TX0_STREAM -pg 1 -lvl 0 -x -50 -y 280 -defaultsOSRD
+preplace port AXI_QSFP_STATUS -pg 1 -lvl 0 -x -50 -y 800 -defaultsOSRD
+preplace port qsfp0_gt -pg 1 -lvl 4 -x 1070 -y 460 -defaultsOSRD
+preplace port qsfp1_gt -pg 1 -lvl 4 -x 1070 -y 490 -defaultsOSRD
+preplace port QSPF_TX1_STREAM -pg 1 -lvl 0 -x -50 -y 300 -defaultsOSRD
+preplace port port-id_init_clk -pg 1 -lvl 0 -x -50 -y 480 -defaultsOSRD
+preplace port port-id_reset_in -pg 1 -lvl 0 -x -50 -y 500 -defaultsOSRD
+preplace port port-id_qsfp0_channel_up -pg 1 -lvl 4 -x 1070 -y 730 -defaultsOSRD
+preplace port port-id_qsfp1_channel_up -pg 1 -lvl 4 -x 1070 -y 750 -defaultsOSRD
+preplace port port-id_data_clock -pg 1 -lvl 0 -x -50 -y 520 -defaultsOSRD
+preplace port port-id_data_aresetn -pg 1 -lvl 0 -x -50 -y 780 -defaultsOSRD
+preplace inst ch0_ethernet -pg 1 -lvl 2 -x 280 -y 360 -swap {5 1 2 3 4 8 6 7 0 9 10 11 12 13 14 15 16 17 18 19 21 20 23 26 25 24 22} -defaultsOSRD -pinDir qsfp_gt right -pinY qsfp_gt 20R -pinDir qsfp_clk right -pinY qsfp_clk 40R -pinDir axis_rx right -pinY axis_rx 0R -pinDir TX_DATA_STREAM left -pinY TX_DATA_STREAM 0L -pinDir reset_in left -pinY reset_in 140L -pinDir init_clk left -pinY init_clk 120L -pinDir rx_clk_out right -pinY rx_clk_out 80R -pinDir channel_up right -pinY channel_up 100R -pinDir data_aresetn left -pinY data_aresetn 180L -pinDir data_clock left -pinY data_clock 160L -pinBusDir rx_resetn right -pinBusY rx_resetn 60R
+preplace inst ch1_ethernet -pg 1 -lvl 2 -x 280 -y 650 -swap {5 1 2 3 4 8 6 7 0 9 10 11 12 13 14 15 16 17 18 19 21 20 25 24 23 22} -defaultsOSRD -pinDir qsfp_gt right -pinY qsfp_gt 20R -pinDir qsfp_clk right -pinY qsfp_clk 60R -pinDir axis_rx right -pinY axis_rx 0R -pinDir TX_DATA_STREAM left -pinY TX_DATA_STREAM 0L -pinDir reset_in left -pinY reset_in 40L -pinDir init_clk left -pinY init_clk 20L -pinDir channel_up right -pinY channel_up 100R -pinDir data_aresetn left -pinY data_aresetn 80L -pinDir data_clock left -pinY data_clock 60L -pinDir rx_clk_in right -pinY rx_clk_in 80R
+preplace inst qsfp_status -pg 1 -lvl 3 -x 830 -y 550 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 21 23 20 22} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 0L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 80L -pinDir ss0_channel_up left -pinY ss0_channel_up 20L -pinDir ss1_channel_up left -pinY ss1_channel_up 60L
+preplace inst tx_data_ila -pg 1 -lvl 2 -x 280 -y 200 -defaultsOSRD -pinDir SLOT_0_AXIS left -pinY SLOT_0_AXIS 0L -pinDir SLOT_1_AXIS left -pinY SLOT_1_AXIS 20L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L
+preplace inst data_consumer_0 -pg 1 -lvl 3 -x 830 -y 220 -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L -pinBusDir packet_id right -pinBusY packet_id 0R -pinBusDir cycle_id right -pinBusY cycle_id 20R
+preplace inst data_consumer_1 -pg 1 -lvl 3 -x 830 -y 360 -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L -pinBusDir packet_id right -pinBusY packet_id 0R -pinBusDir cycle_id right -pinBusY cycle_id 20R
+preplace inst rx_data_ila -pg 1 -lvl 3 -x 830 -y 60 -swap {0 1 2 3 4 5 6 7 8 9 10 11 17 15 16 13 14 12} -defaultsOSRD -pinDir SLOT_0_AXIS left -pinY SLOT_0_AXIS 0L -pinDir SLOT_1_AXIS left -pinY SLOT_1_AXIS 20L -pinDir clk left -pinY clk 60L -pinBusDir probe0 right -pinBusY probe0 40R -pinBusDir probe1 right -pinBusY probe1 60R -pinBusDir probe2 right -pinBusY probe2 0R -pinBusDir probe3 right -pinBusY probe3 20R -pinDir resetn left -pinY resetn 40L
+preplace netloc aclk_1 1 0 3 N 520 50 590 NJ
+preplace netloc aresetn_1 1 0 3 -30 820 70 820 640J
+preplace netloc aurora_64b66b_0_channel_up 1 2 2 480 730 NJ
+preplace netloc aurora_core_1_channel_up 1 2 2 620 750 NJ
+preplace netloc clock_1 1 0 2 N 480 30
+preplace netloc cycle_id_1 1 3 1 1000 100n
+preplace netloc cycle_id_2 1 3 1 1040 60n
+preplace netloc packet_id_1 1 3 1 980 120n
+preplace netloc packet_id_2 1 3 1 1020 80n
 preplace netloc qsfp0_ethernet_gt_rxusrclk2 1 2 1 560 120n
-preplace netloc reset_in_1 1 0 2 N 500 60
+preplace netloc reset_in_1 1 0 2 N 500 10
 preplace netloc reset_inverter_1_Res 1 2 1 540 100n
-preplace netloc Conn2 1 0 2 N 300 140
-preplace netloc Conn5 1 2 2 620J 490 NJ
-preplace netloc Conn6 1 0 3 NJ 800 N 800 640J
-preplace netloc Conn7 1 2 2 NJ 460 NJ
-preplace netloc QSFP_TX0_STREAM_1 1 0 2 N 280 160
-preplace netloc ch0_ethernet_axis_rx 1 2 1 500 60n
-preplace netloc ch1_ethernet_axis_rx 1 2 1 520 80n
-preplace netloc qsfp0_clk_1 1 2 2 600J 690 NJ
+preplace netloc Conn2 1 0 2 N 300 110
+preplace netloc Conn5 1 2 2 580J 490 NJ
+preplace netloc Conn6 1 0 3 NJ 800 N 800 600J
+preplace netloc Conn7 1 2 2 520J 460 NJ
+preplace netloc QSFP_TX0_STREAM_1 1 0 2 N 280 90
+preplace netloc ch0_ethernet_axis_rx 1 2 1 440 60n
+preplace netloc ch1_ethernet_axis_rx 1 2 1 460 80n
+preplace netloc qsfp0_clk_1 1 2 2 500J 690 NJ
 preplace netloc qsfp1_clk_1 1 2 2 NJ 710 NJ
-levelinfo -pg 1 0 40 320 850 1090
-pagesize -pg 1 -db -bbox -sgen -190 0 1270 830
+levelinfo -pg 1 -50 -10 280 830 1070
+pagesize -pg 1 -db -bbox -sgen -240 0 1250 910
 ",
    "No Loops_ScaleFactor":"0.815663",
-   "No Loops_TopLeft":"-378,1",
+   "No Loops_TopLeft":"-401,0",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port qsfp0_clk -pg 1 -lvl 0 -x -360 -y 150 -defaultsOSRD

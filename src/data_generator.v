@@ -40,10 +40,14 @@ wire eop = (cycle_index == latched_pl);
 
 // Fill in the packet data
 assign AXIS_TX_TKEEP = -1;
-assign AXIS_TX_TDATA[0   +: 64] = counter;
-assign AXIS_TX_TDATA[64  +: 64] = packet_num;
-assign AXIS_TX_TDATA[384 +: 64] = ~packet_num;
-assign AXIS_TX_TDATA[448 +: 64] = ~counter;
+
+assign AXIS_TX_TDATA = {64{counter[7:0]}};
+
+//assign AXIS_TX_TDATA[0   +: 64] = counter;
+//assign AXIS_TX_TDATA[64  +: 64] = packet_num;
+//assign AXIS_TX_TDATA[384 +: 64] = ~packet_num;
+//assign AXIS_TX_TDATA[448 +: 64] = ~counter;
+
 assign AXIS_TX_TLAST            = eop;
 
 

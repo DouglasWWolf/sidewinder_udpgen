@@ -80,9 +80,9 @@ preplace inst restart_manager -pg 1 -lvl 3 -x 920 -y 370 -defaultsOSRD -pinDir S
 preplace inst system_interconnect -pg 1 -lvl 2 -x 590 -y 210 -swap {118 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 0 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 78 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 152 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 58 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 38 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 98 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172} -defaultsOSRD -pinDir S00_AXI left -pinY S00_AXI 360L -pinDir M00_AXI left -pinY M00_AXI 320L -pinDir M01_AXI right -pinY M01_AXI 80R -pinDir M02_AXI right -pinY M02_AXI 300R -pinDir M03_AXI right -pinY M03_AXI 0R -pinDir M04_AXI left -pinY M04_AXI 340L -pinDir M05_AXI right -pinY M05_AXI 160R -pinDir aclk left -pinY aclk 380L
 preplace inst axi_revision -pg 1 -lvl 3 -x 920 -y 510 -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 0L -pinDir AXI_ACLK left -pinY AXI_ACLK 20L -pinDir AXI_ARESETN left -pinY AXI_ARESETN 40L
 preplace inst traffic_control -pg 1 -lvl 3 -x 920 -y 60 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 24 22 26 23 21 25} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 150L -pinDir clk left -pinY clk 170L -pinDir resetn right -pinY resetn 130R -pinBusDir ch0_count right -pinBusY ch0_count 20R -pinBusDir ch1_count right -pinBusY ch1_count 170R -pinBusDir packet_length right -pinBusY packet_length 40R -pinDir ch0_start right -pinY ch0_start 0R -pinDir ch1_start right -pinY ch1_start 150R
+preplace inst eth_to_udp_0 -pg 1 -lvl 5 -x 1630 -y 140 -swap {0 1 2 3 4 5 6 7 8 9 10 11 13 12} -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir AXIS_TX right -pinY AXIS_TX 80R -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 60L
 preplace inst data_generator_0 -pg 1 -lvl 4 -x 1330 -y 60 -swap {0 1 2 3 4 5 9 10 7 8 6} -defaultsOSRD -pinDir AXIS_TX right -pinY AXIS_TX 80R -pinDir clk left -pinY clk 60L -pinDir resetn left -pinY resetn 80L -pinBusDir packet_count left -pinBusY packet_count 20L -pinBusDir packet_length left -pinBusY packet_length 40L -pinDir start left -pinY start 0L
 preplace inst data_generator_1 -pg 1 -lvl 4 -x 1330 -y 370 -swap {0 1 2 3 4 5 10 6 9 7 8} -defaultsOSRD -pinDir AXIS_TX right -pinY AXIS_TX 0R -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 0L -pinBusDir packet_count left -pinBusY packet_count 60L -pinBusDir packet_length left -pinBusY packet_length 20L -pinDir start left -pinY start 40L
-preplace inst eth_to_udp_0 -pg 1 -lvl 5 -x 1630 -y 140 -swap {0 1 2 3 4 5 6 7 8 9 10 11 13 12} -defaultsOSRD -pinDir AXIS_RX left -pinY AXIS_RX 0L -pinDir AXIS_TX right -pinY AXIS_TX 80R -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 60L
 preplace netloc ext_reset_in_0_1 1 0 1 NJ 940
 preplace netloc ila_250mhz 1 1 5 430 690 730 310 1090 510 1490J 410 N
 preplace netloc pcie_axi_bridge_led_pci_link_up 1 1 6 NJ 730 770J 610 NJ 610 1510J 270 1750J 160 N
@@ -101,6 +101,8 @@ preplace netloc xdma_0_axi_aresetn 1 1 5 NJ 710 750J 630 1150 590 NJ 590 N
 preplace netloc CLK_IN_D_0_1 1 0 1 NJ 840
 preplace netloc GT_DIFF_REFCLK1_0_1 1 6 1 N 280
 preplace netloc GT_DIFF_REFCLK1_0_3 1 6 1 N 220
+preplace netloc QSFP_TX0_STREAM_1 1 5 1 N 220
+preplace netloc data_generator_0_AXIS_TX 1 4 1 N 140
 preplace netloc data_generator_1_AXIS_TX 1 4 2 NJ 370 N
 preplace netloc pci_refclk_1 1 0 1 NJ 550
 preplace netloc pcie_axi_bridge_M_AXI_B 1 1 1 N 570
@@ -113,13 +115,11 @@ preplace netloc system_interconnect_M02_AXI 1 2 1 N 510
 preplace netloc system_interconnect_M03_AXI 1 2 1 N 210
 preplace netloc system_interconnect_M04_AXI 1 1 1 NJ 550
 preplace netloc system_interconnect_M05_AXI 1 2 1 N 370
-preplace netloc data_generator_0_AXIS_TX 1 4 1 N 140
-preplace netloc QSFP_TX0_STREAM_1 1 5 1 N 220
 levelinfo -pg 1 0 210 590 920 1330 1630 1920 2110
 pagesize -pg 1 -db -bbox -sgen -140 0 2270 1100
 ",
-   "No Loops_ScaleFactor":"0.615455",
-   "No Loops_TopLeft":"-138,3",
+   "No Loops_ScaleFactor":"0.870384",
+   "No Loops_TopLeft":"564,1",
    "Reduced Jogs_ExpandedHierarchyInLayout":"",
    "Reduced Jogs_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
