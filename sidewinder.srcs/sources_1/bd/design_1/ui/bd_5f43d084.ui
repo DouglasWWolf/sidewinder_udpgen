@@ -10,10 +10,10 @@ preplace port AXIS_RX -pg 1 -lvl 0 -x 0 -y 70 -defaultsOSRD
 preplace port AXIS_TX -pg 1 -lvl 5 -x 1100 -y 30 -defaultsOSRD
 preplace port port-id_clk -pg 1 -lvl 0 -x 0 -y 90 -defaultsOSRD
 preplace port port-id_resetn -pg 1 -lvl 0 -x 0 -y 110 -defaultsOSRD
-preplace inst measure_pkt_size -pg 1 -lvl 1 -x 160 -y 90 -defaultsOSRD
 preplace inst packet_data_fifo -pg 1 -lvl 2 -x 440 -y 240 -defaultsOSRD
 preplace inst packet_size_fifo -pg 1 -lvl 2 -x 440 -y 100 -defaultsOSRD
 preplace inst udp_ila -pg 1 -lvl 3 -x 690 -y 130 -defaultsOSRD
+preplace inst measure_pkt_size -pg 1 -lvl 1 -x 160 -y 90 -defaultsOSRD
 preplace inst eth2udp -pg 1 -lvl 4 -x 940 -y 250 -defaultsOSRD
 preplace netloc clk_1 1 0 4 20 10 310 20 560 20 790
 preplace netloc resetn_1 1 0 4 20 170 320 320 590 280 N

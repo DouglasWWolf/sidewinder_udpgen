@@ -29,7 +29,6 @@ module meas_pkt_size
     
     //========  The output side of the AXI data stream we're measuring  ========
     output [511:0] AXIS_TX_TDATA,
-    output [63:0]  AXIS_TX_TKEEP,
     output         AXIS_TX_TVALID,
     output         AXIS_TX_TLAST,
     input          AXIS_TX_TREADY,
@@ -46,7 +45,6 @@ module meas_pkt_size
 
 // Tie the output stream to the input stream
 assign AXIS_TX_TDATA  = AXIS_RX_TDATA;
-assign AXIS_TX_TKEEP  = AXIS_RX_TKEEP;
 assign AXIS_TX_TVALID = AXIS_RX_TVALID;
 assign AXIS_TX_TLAST  = AXIS_RX_TLAST;
 assign AXIS_RX_TREADY = AXIS_TX_TREADY;
@@ -62,9 +60,8 @@ integer i;
 always @(AXIS_RX_TKEEP)
 begin
     data_byte_count = 0;  
-    for(i=0;i<64;i=i+1)   
-        if(AXIS_RX_TKEEP[i]) 
-            data_byte_count = data_byte_count + 1;
+    for (i=0;i<64;i=i+1)   
+        data_byte_count = data_byte_count + AXIS_RX_TKEEP[i];
 end
 //==============================================================================
 
