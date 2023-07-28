@@ -42,7 +42,7 @@
       "traffic_control": "",
       "eth_to_udp_0": {
         "measure_pkt_size": "",
-        "data_fifo": "",
+        "packet_data_fifo": "",
         "packet_size_fifo": "",
         "udp_ila": "",
         "eth2udp": ""
@@ -3228,11 +3228,11 @@
               }
             }
           },
-          "data_fifo": {
+          "packet_data_fifo": {
             "vlnv": "xilinx.com:ip:axis_data_fifo:2.0",
             "xci_name": "design_1_axis_data_fifo_0_9",
             "xci_path": "ip/design_1_axis_data_fifo_0_9/design_1_axis_data_fifo_0_9.xci",
-            "inst_hier_path": "eth_to_udp_0/data_fifo"
+            "inst_hier_path": "eth_to_udp_0/packet_data_fifo"
           },
           "packet_size_fifo": {
             "vlnv": "xilinx.com:ip:axis_data_fifo:2.0",
@@ -3358,7 +3358,7 @@
                 "parameters": {
                   "TDATA_NUM_BYTES": {
                     "value": "64",
-                    "value_src": "constant"
+                    "value_src": "auto"
                   },
                   "TDEST_WIDTH": {
                     "value": "0",
@@ -3381,7 +3381,7 @@
                     "value_src": "constant"
                   },
                   "HAS_TKEEP": {
-                    "value": "1",
+                    "value": "0",
                     "value_src": "constant"
                   },
                   "HAS_TLAST": {
@@ -3394,12 +3394,6 @@
                     "physical_name": "AXIS_RX_TDATA",
                     "direction": "I",
                     "left": "511",
-                    "right": "0"
-                  },
-                  "TKEEP": {
-                    "physical_name": "AXIS_RX_TKEEP",
-                    "direction": "I",
-                    "left": "63",
                     "right": "0"
                   },
                   "TLAST": {
@@ -3423,7 +3417,7 @@
                 "parameters": {
                   "TDATA_NUM_BYTES": {
                     "value": "64",
-                    "value_src": "constant"
+                    "value_src": "auto"
                   },
                   "TDEST_WIDTH": {
                     "value": "0",
@@ -3447,7 +3441,7 @@
                   },
                   "HAS_TKEEP": {
                     "value": "1",
-                    "value_src": "constant"
+                    "value_src": "auto"
                   },
                   "HAS_TLAST": {
                     "value": "1",
@@ -3519,7 +3513,7 @@
           },
           "data_fifo_M_AXIS": {
             "interface_ports": [
-              "data_fifo/M_AXIS",
+              "packet_data_fifo/M_AXIS",
               "eth2udp/AXIS_RX",
               "udp_ila/SLOT_1_AXIS"
             ]
@@ -3540,7 +3534,7 @@
           "measure_pkt_size_AXIS_TX": {
             "interface_ports": [
               "measure_pkt_size/AXIS_TX",
-              "data_fifo/S_AXIS"
+              "packet_data_fifo/S_AXIS"
             ]
           },
           "packet_size_fifo_M_AXIS": {
@@ -3556,7 +3550,7 @@
             "ports": [
               "clk",
               "measure_pkt_size/clk",
-              "data_fifo/s_axis_aclk",
+              "packet_data_fifo/s_axis_aclk",
               "packet_size_fifo/s_axis_aclk",
               "udp_ila/clk",
               "eth2udp/clk"
@@ -3566,7 +3560,7 @@
             "ports": [
               "resetn",
               "measure_pkt_size/resetn",
-              "data_fifo/s_axis_aresetn",
+              "packet_data_fifo/s_axis_aresetn",
               "packet_size_fifo/s_axis_aresetn",
               "udp_ila/resetn",
               "eth2udp/resetn"

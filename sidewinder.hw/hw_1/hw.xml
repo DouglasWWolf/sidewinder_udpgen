@@ -24,7 +24,7 @@
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
     <Object name="design_1_i/eth_to_udp_0/udp_ila/inst/ila_lib" gui_info="">
-      <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
+      <Properties Property="CONTROL.TRIGGER_CONDITION" value="OR"/>
       <Properties Property="CONTROL.TRIGGER_POSITION" value="20"/>
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
@@ -49,6 +49,7 @@
   </ObjectList>
   <ObjectList object_type="hw_probe" gui_info="">
     <Object name="design_1_i/eth_to_udp_0/system_ila_0/inst/net_slot_0_axis_tvalid" gui_info="Trigger Setup=0"/>
+    <Object name="design_1_i/eth_to_udp_0/udp_ila/inst/net_slot_0_axis_tvalid" gui_info="Trigger Setup=1"/>
     <Object name="design_1_i/eth_to_udp_0/udp_ila/inst/net_slot_2_axis_tvalid" gui_info="Trigger Setup=0"/>
     <Object name="design_1_i/qsfp_data/rx_data_ila/inst/net_slot_0_axis_tvalid" gui_info="Trigger Setup=0"/>
     <Object name="design_1_i/qsfp_data/rx_data_ila/inst/net_slot_1_axis_tvalid" gui_info="Trigger Setup=1"/>
@@ -236,7 +237,7 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bR"/>
         <Option Id="DISPLAY_AS_ENUM" value="1"/>
         <Option Id="DISPLAY_HINT" value=""/>
         <Option Id="DISPLAY_RADIX" value="HEX"/>
@@ -247,7 +248,7 @@
         <Option Id="NAME.CUSTOM" value="slot_0 : packet_size_fifo_M_AXIS : TVALID"/>
         <Option Id="NAME.SELECT" value="Custom"/>
         <Option Id="SOURCE" value="netlist"/>
-        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bR"/>
         <Option Id="WAVEFORM_STYLE" value="Digital"/>
       </probeOptions>
       <nets>

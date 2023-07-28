@@ -118,8 +118,8 @@ preplace netloc system_interconnect_M05_AXI 1 2 1 N 370
 levelinfo -pg 1 0 210 590 920 1330 1630 1920 2110
 pagesize -pg 1 -db -bbox -sgen -140 0 2270 1100
 ",
-   "No Loops_ScaleFactor":"0.870384",
-   "No Loops_TopLeft":"564,1",
+   "No Loops_ScaleFactor":"0.615455",
+   "No Loops_TopLeft":"-138,3",
    "Reduced Jogs_ExpandedHierarchyInLayout":"",
    "Reduced Jogs_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
