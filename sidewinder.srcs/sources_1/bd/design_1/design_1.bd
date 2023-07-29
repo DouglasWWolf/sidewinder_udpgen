@@ -7,7 +7,8 @@
       "name": "design_1",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2021.1"
+      "tool_version": "2021.1",
+      "validated": "true"
     },
     "design_tree": {
       "system_reset_100mhz": "",
@@ -42,18 +43,39 @@
       "data_generator_0": "",
       "data_generator_1": "",
       "axi_revision": "",
-      "axis_to_udp_0": ""
+      "axis_to_udp_0": "",
+      "axis_to_udp_1": ""
     },
     "interface_ports": {
       "clk_100mhz": {
         "mode": "Slave",
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
-        "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0"
+        "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          }
+        }
       },
       "pci_refclk": {
         "mode": "Slave",
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
-        "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0"
+        "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          }
+        }
       },
       "pcie_mgt": {
         "mode": "Master",
@@ -65,6 +87,10 @@
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
         "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
         "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "322265625"
           }
@@ -75,6 +101,10 @@
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
         "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
         "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "322265625"
           }
@@ -83,18 +113,40 @@
       "qsfp0_gt": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gt:1.0",
-        "vlnv": "xilinx.com:interface:gt_rtl:1.0"
+        "vlnv": "xilinx.com:interface:gt_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          }
+        }
       },
       "qsfp1_gt": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gt:1.0",
-        "vlnv": "xilinx.com:interface:gt_rtl:1.0"
+        "vlnv": "xilinx.com:interface:gt_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          }
+        }
       }
     },
     "ports": {
       "pb_rst_n": {
         "type": "rst",
-        "direction": "I"
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
       },
       "led_pci_link_up": {
         "direction": "O"
@@ -3213,6 +3265,14 @@
         "xci_name": "design_1_axis2udp_0_0",
         "xci_path": "ip/design_1_axis2udp_0_0/design_1_axis2udp_0_0.xci",
         "inst_hier_path": "axis_to_udp_0",
+        "parameters": {
+          "DST_PORT": {
+            "value": "32002"
+          },
+          "SRC_MAC": {
+            "value": "2"
+          }
+        },
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "axis2udp",
@@ -3255,6 +3315,14 @@
               "HAS_TLAST": {
                 "value": "1",
                 "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
               }
             },
             "port_maps": {
@@ -3320,6 +3388,14 @@
               "HAS_TLAST": {
                 "value": "1",
                 "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
               }
             },
             "port_maps": {
@@ -3362,6 +3438,218 @@
               "ASSOCIATED_RESET": {
                 "value": "resetn",
                 "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "resetn": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_LOW",
+                "value_src": "constant"
+              }
+            }
+          }
+        }
+      },
+      "axis_to_udp_1": {
+        "vlnv": "xilinx.com:module_ref:axis2udp:1.0",
+        "xci_name": "design_1_axis_to_udp_0_0",
+        "xci_path": "ip/design_1_axis_to_udp_0_0/design_1_axis_to_udp_0_0.xci",
+        "inst_hier_path": "axis_to_udp_1",
+        "parameters": {
+          "DST_PORT": {
+            "value": "32003"
+          },
+          "SRC_IP3": {
+            "value": "3"
+          },
+          "SRC_MAC": {
+            "value": "3"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "axis2udp",
+          "boundary_crc": "0x0"
+        },
+        "interface_ports": {
+          "AXIS_PD": {
+            "mode": "Slave",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+            "parameters": {
+              "TDATA_NUM_BYTES": {
+                "value": "64",
+                "value_src": "auto"
+              },
+              "TDEST_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TID_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TUSER_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TREADY": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "HAS_TSTRB": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TKEEP": {
+                "value": "1",
+                "value_src": "auto"
+              },
+              "HAS_TLAST": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
+              }
+            },
+            "port_maps": {
+              "TDATA": {
+                "physical_name": "AXIS_PD_TDATA",
+                "direction": "I",
+                "left": "511",
+                "right": "0"
+              },
+              "TKEEP": {
+                "physical_name": "AXIS_PD_TKEEP",
+                "direction": "I",
+                "left": "63",
+                "right": "0"
+              },
+              "TLAST": {
+                "physical_name": "AXIS_PD_TLAST",
+                "direction": "I"
+              },
+              "TVALID": {
+                "physical_name": "AXIS_PD_TVALID",
+                "direction": "I"
+              },
+              "TREADY": {
+                "physical_name": "AXIS_PD_TREADY",
+                "direction": "O"
+              }
+            }
+          },
+          "AXIS_TX": {
+            "mode": "Master",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+            "parameters": {
+              "TDATA_NUM_BYTES": {
+                "value": "64",
+                "value_src": "auto"
+              },
+              "TDEST_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TID_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TUSER_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TREADY": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "HAS_TSTRB": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TKEEP": {
+                "value": "1",
+                "value_src": "auto"
+              },
+              "HAS_TLAST": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
+              }
+            },
+            "port_maps": {
+              "TDATA": {
+                "physical_name": "AXIS_TX_TDATA",
+                "direction": "O",
+                "left": "511",
+                "right": "0"
+              },
+              "TKEEP": {
+                "physical_name": "AXIS_TX_TKEEP",
+                "direction": "O",
+                "left": "63",
+                "right": "0"
+              },
+              "TLAST": {
+                "physical_name": "AXIS_TX_TLAST",
+                "direction": "O"
+              },
+              "TVALID": {
+                "physical_name": "AXIS_TX_TVALID",
+                "direction": "O"
+              },
+              "TREADY": {
+                "physical_name": "AXIS_TX_TREADY",
+                "direction": "I"
+              }
+            }
+          }
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_BUSIF": {
+                "value": "AXIS_PD:AXIS_TX",
+                "value_src": "constant"
+              },
+              "ASSOCIATED_RESET": {
+                "value": "resetn",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "250000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_xdma_0_0_axi_aclk",
+                "value_src": "default_prop"
               }
             }
           },
@@ -3403,6 +3691,12 @@
           "axis_to_udp_0/AXIS_TX"
         ]
       },
+      "axis_to_udp_1_AXIS_TX": {
+        "interface_ports": [
+          "axis_to_udp_1/AXIS_TX",
+          "qsfp_data/QSPF_TX1_STREAM"
+        ]
+      },
       "data_generator_0_AXIS_TX": {
         "interface_ports": [
           "data_generator_0/AXIS_TX",
@@ -3412,7 +3706,7 @@
       "data_generator_1_AXIS_TX": {
         "interface_ports": [
           "data_generator_1/AXIS_TX",
-          "qsfp_data/QSPF_TX1_STREAM"
+          "axis_to_udp_1/AXIS_PD"
         ]
       },
       "pci_refclk_1": {
@@ -3499,7 +3793,8 @@
           "data_generator_0/clk",
           "data_generator_1/clk",
           "axi_revision/AXI_ACLK",
-          "axis_to_udp_0/clk"
+          "axis_to_udp_0/clk",
+          "axis_to_udp_1/clk"
         ]
       },
       "pcie_axi_bridge_led_pci_link_up": {
@@ -3532,7 +3827,8 @@
           "traffic_control/resetn",
           "data_generator_0/resetn",
           "data_generator_1/resetn",
-          "axis_to_udp_0/resetn"
+          "axis_to_udp_0/resetn",
+          "axis_to_udp_1/resetn"
         ]
       },
       "system_reset_100mhz_peripheral_aresetn": {

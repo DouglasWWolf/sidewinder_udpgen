@@ -27,7 +27,7 @@ module axis2udp #
     // This is the width of the incoming and outgoing data bus
     parameter SWIDTH = 512,      
 
-    parameter[ 7:0] SRC_MAC = 1,    
+    parameter[ 7:0] SRC_MAC = 2,    
     
     parameter[ 7:0] SRC_IP0 = 10,
     parameter[ 7:0] SRC_IP1 = 1,
@@ -40,7 +40,7 @@ module axis2udp #
     parameter[ 7:0] DST_IP3 = 255,
     
     parameter[15:0] SRC_PORT = 1000,
-    parameter[15:0] DST_PORT = 32000,
+    parameter[15:0] DST_PORT = 32002,
 
     // This must be large enough to contain at least 1 of the largest packet.  Min is 16.
     parameter DATA_FIFO_SIZE = 64,
@@ -267,7 +267,7 @@ end
 // consecutive cycle after receiving a packet-length.
 //=====================================================================================================================
 
-// We are able to receive data from AXIS_LEN in state 1, when the TX bus is ready for us to send
+// We are able to receive data from AXIS_LEN in state 1 only when the TX bus is ready for us to send
 assign AXIS_LEN_TREADY = (resetn == 1 & fsm_state == 1 & AXIS_TX_TREADY);
 
 always @(posedge clk) begin
@@ -370,7 +370,7 @@ reg[15:0] packet_size;
 // AXIS_PL contains the measured length of the incoming data packet
 assign AXIS_PL_TDATA = packet_size + data_byte_count;
 
-// AXIS_LEN has valid data on the cycle where we see TLAST on the incoming data packet
+// AXIS_PL has valid data on the cycle where we see TLAST on the incoming data packet
 assign AXIS_PL_TVALID = (AXIS_PD_TREADY & AXIS_PD_TVALID & AXIS_PD_TLAST);
 
 always @(posedge clk) begin
@@ -406,8 +406,8 @@ packet_data_fifo
 (
     // Clock and reset
    .s_aclk   (clk   ),                       
-   .s_aresetn(resetn),
    .m_aclk   (clk   ),             
+   .s_aresetn(resetn),
 
     // Feeds the input of the FIFO
    .s_axis_tdata (AXIS_PD_TDATA ),
@@ -465,8 +465,8 @@ packet_length_fifo
 (
     // Clock and reset
    .s_aclk   (clk   ),                       
-   .s_aresetn(resetn),
    .m_aclk   (clk   ),             
+   .s_aresetn(resetn),
 
     // Feeds the input of the FIFO
    .s_axis_tdata (AXIS_PL_TDATA ),
