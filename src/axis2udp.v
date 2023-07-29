@@ -9,10 +9,19 @@
 //====================================================================================
 /*
 
-    This module formats an AXI stream as a UDP packet.  The incoming AXI Stream should be
-    byte packed; only the last beat (the beat with AXIS_PD_TLAST asserted) may have a TKEEP
-    value with bits set to 0.
+    This module formats an AXI stream as a UDP packet.  It does this by buffering up
+    an incoming packet (in a FIFO) while it counts the number of bytes in the
+    packet.  Once the incoming packet has arrived, the packet-length is written into
+    its own FIFO.
+
+    The thread that reads those two FIFOs builds a valid Eth/IPv4/UDP packet header 
+    then outputs (byte packed) the packet header followed by the packet data.
+        
+    The incoming AXI Stream should be byte packed; only the last beat (the beat with
+    AXIS_PD_TLAST asserted) may have a TKEEP value with bits set to 0.
     
+    Notable busses:
+
     AXIS_PL feeds the input of the packet-length FIFO
     AXIS_PD feeds the input of the packet-data FIFO
 
@@ -27,18 +36,22 @@ module axis2udp #
     // This is the width of the incoming and outgoing data bus
     parameter SWIDTH = 512,      
 
+    // Last octet of the source MAC address
     parameter[ 7:0] SRC_MAC = 2,    
     
+    // The source IP address
     parameter[ 7:0] SRC_IP0 = 10,
     parameter[ 7:0] SRC_IP1 = 1,
     parameter[ 7:0] SRC_IP2 = 1,
     parameter[ 7:0] SRC_IP3 = 2,
 
+    // The destiniation IP address
     parameter[ 7:0] DST_IP0 = 10,
     parameter[ 7:0] DST_IP1 = 1,
     parameter[ 7:0] DST_IP2 = 1,
     parameter[ 7:0] DST_IP3 = 255,
     
+    // The source and destination UDP ports
     parameter[15:0] SRC_PORT = 1000,
     parameter[15:0] DST_PORT = 32002,
 
@@ -409,13 +422,13 @@ packet_data_fifo
    .m_aclk   (clk   ),             
    .s_aresetn(resetn),
 
-    // Feeds the input of the FIFO
+    // The input bus to the FIFO
    .s_axis_tdata (AXIS_PD_TDATA ),
    .s_axis_tvalid(AXIS_PD_TVALID),
    .s_axis_tlast (AXIS_PD_TLAST ),
    .s_axis_tready(AXIS_PD_TREADY),
 
-    // The output of the FIFO
+    // The output bus of the FIFO
    .m_axis_tdata (AXIS_RX_TDATA ),     
    .m_axis_tvalid(AXIS_RX_TVALID),       
    .m_axis_tlast (AXIS_RX_TLAST ),         
@@ -468,15 +481,14 @@ packet_length_fifo
    .m_aclk   (clk   ),             
    .s_aresetn(resetn),
 
-    // Feeds the input of the FIFO
+    // The input bus to the FIFO
    .s_axis_tdata (AXIS_PL_TDATA ),
    .s_axis_tvalid(AXIS_PL_TVALID),
    .s_axis_tready(AXIS_PL_TREADY),
 
-    // The output of the FIFO
+    // The output bus of the FIFO
    .m_axis_tdata (AXIS_LEN_TDATA ),     
    .m_axis_tvalid(AXIS_LEN_TVALID),       
-   .m_axis_tlast (AXIS_LEN_TLAST ),         
    .m_axis_tready(AXIS_LEN_TREADY),     
 
     // Unused input stream signals
@@ -493,6 +505,7 @@ packet_length_fifo
    .m_axis_tstrb(), 
    .m_axis_tuser(),         
    .m_axis_tkeep(),           
+   .m_axis_tlast(),         
 
     // Other unused signals
    .almost_empty_axis(),

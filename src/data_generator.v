@@ -30,29 +30,52 @@ module data_generator
 reg[ 1:0] fsm_state;            // State of the state machine
 reg[ 7:0] latched_pl;           // Packet length, latched 
 reg[ 7:0] cycle_index;          // Counts continuously from 1 to 'latched_pl'
-reg[63:0] packet_num;           // Current packet number being transmitted
-reg[63:0] counter;              // Count of data-cycles transmitted
+reg[16:0] packet_num;           // Current packet number being transmitted
+reg[ 7:0] counter;              // Count of data-cycles transmitted
 reg[63:0] packets_remaining;    // How many packets remain to be transmitted?
 reg       restart;              // When this is 1, a new batch of packets gets sent
 
 // This is high on any data-cycle that is the last data-cycle of the packet
 wire eop = (cycle_index == latched_pl);
 
-// Fill in the packet data
+wire[7:0] tag[0:15];
+assign tag[ 0] = 8'h00;
+assign tag[ 1] = 8'h11;
+assign tag[ 2] = 8'h22;
+assign tag[ 3] = 8'h33;
+assign tag[ 4] = 8'h44;
+assign tag[ 5] = 8'h55;
+assign tag[ 6] = 8'h66;
+assign tag[ 7] = 8'h77;
+assign tag[ 8] = 8'h88;
+assign tag[ 9] = 8'h99;
+assign tag[10] = 8'hAA;
+assign tag[11] = 8'hBB;
+assign tag[12] = 8'hCC;
+assign tag[13] = 8'hDD;
+assign tag[14] = 8'hEE;
+assign tag[15] = 8'hFF;
+
+//--------------------------------------------------------------------------------------------
+// Fill in TX_DATA with predictable data
+//--------------------------------------------------------------------------------------------
+
+// In the debugger, this marks an easily visble data-cycle boundary
+assign AXIS_TX_TDATA[0 +: 32] = 32'hFFFF_FFFF;  
+
+// The other 15 32-bit words have predictable data in them
+genvar i;
+for (i=1; i<16; i=i+1) begin
+    assign AXIS_TX_TDATA[i*32 +:32] = {tag[i], counter, packet_num[15:8], packet_num[7:0]};
+end
+//--------------------------------------------------------------------------------------------
+
+// Fill in the outgoing data-packet fields
 assign AXIS_TX_TKEEP = -1;
-
-assign AXIS_TX_TDATA = {64{counter[7:0]}};
-
-//assign AXIS_TX_TDATA[0   +: 64] = counter;
-//assign AXIS_TX_TDATA[64  +: 64] = packet_num;
-//assign AXIS_TX_TDATA[384 +: 64] = ~packet_num;
-//assign AXIS_TX_TDATA[448 +: 64] = ~counter;
-
-assign AXIS_TX_TLAST            = eop;
+assign AXIS_TX_TLAST = eop;
 
 
 always @(posedge clk) begin
-
 
     if (resetn == 0) begin
         counter        <= 0;
