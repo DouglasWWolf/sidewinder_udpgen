@@ -394,7 +394,7 @@ always @(posedge clk) begin
         // On every beat of incoming packet data, accumulate the packet-length.
         // When we see the last beat of the packet, write the packet-length to the FIFO
         if (AXIS_PD_TVALID & AXIS_PD_TREADY) begin
-            if (AXIS_RX_TLAST == 0)
+            if (AXIS_PD_TLAST == 0)
                 packet_size <= packet_size + data_byte_count;
             else 
                 packet_size <= 0;
@@ -520,7 +520,5 @@ packet_length_fifo
    .injectsbiterr_axis()
 );
 //====================================================================================
-
-
 
 endmodule
