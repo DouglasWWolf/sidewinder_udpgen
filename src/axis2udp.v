@@ -145,21 +145,19 @@ localparam[15:0] udp_checksum   = 0;
 wire[15:0]       ip4_length     = 28 + AXIS_LEN_TDATA;
 wire[15:0]       udp_length     =  8 + AXIS_LEN_TDATA;
 
-// Compute the checksum of the fixed fields in the IPv4 header
-localparam[31:0] ip4_partial_cs = ip4_ver_dsf
-                                + ip4_id
-                                + ip4_flags
-                                + ip4_ttl_prot
-                                + ip4_srcip_h
-                                + ip4_srcip_l
-                                + ip4_dstip_h
-                                + ip4_dstip_l;
-
-// The 32-bit checksum of the 9 IPv4 header fields includes the length
-wire[31:0] ip4_32_cs = ip4_partial_cs + ip4_length;
+// Compute the 32-bit version of the IPv4 header checksum
+wire[31:0] ip4_cs32 = ip4_ver_dsf
+                    + ip4_id
+                    + ip4_flags
+                    + ip4_ttl_prot
+                    + ip4_srcip_h
+                    + ip4_srcip_l
+                    + ip4_dstip_h
+                    + ip4_dstip_l
+                    + ip4_length;
 
 // Compute the 16-bit IPv4 checksum
-wire[15:0] ip4_checksum = ~(ip4_32_cs[15:0] + ip4_32_cs[31:16]);
+wire[15:0] ip4_checksum = ~(ip4_cs32[15:0] + ip4_cs32[31:16]);
 
 // This is the 42-byte packet header for a UDP packet
 wire[HWIDTH-1:0] pkt_header =
